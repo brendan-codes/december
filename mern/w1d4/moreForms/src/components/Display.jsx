@@ -1,7 +1,7 @@
 import Album from "./Album";
 
 const Display = (props) => {
-    const {albums} = props;
+    const {albums,removeFromAlbums} = props;
 
     return (
         <>
@@ -9,7 +9,11 @@ const Display = (props) => {
             <ul>
             {
                 albums.map((album, idx) => 
-                    <Album key={idx} album={album}/>
+                    <Album 
+                        key={idx} 
+                        album={album} 
+                        removeFromAlbums={removeFromAlbums}
+                    />
                 )
             }
             </ul>
