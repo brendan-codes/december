@@ -1,0 +1,8 @@
+PORT=8009
+
+# mongo atlas conifg
+
+URI="mongodb+srv://admin:root@cluster0.j2lcfwg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+ATLAS_USERNAME=admin
+ATLAS_PASSWORD=root
+DB_NAME=myDatabase
