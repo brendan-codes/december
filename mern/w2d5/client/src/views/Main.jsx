@@ -15,10 +15,13 @@ export default () => {
             })
             .catch(err => console.error(err));
     },[]);
+
+    const addPerson = (person) => setPeople([...people, person]);
+    
     
     return (
         <div>
-            <PersonForm />
+            <PersonForm addPerson={addPerson} />
             <hr/>
             {loaded && <PersonList people={people}/>}
         </div>

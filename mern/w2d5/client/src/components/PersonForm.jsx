@@ -1,10 +1,12 @@
 import{ useState } from 'react'
 import axios from 'axios';
 
-export default () => {
+export default ({addPerson}) => {
     //keep track of what is being typed via useState hook
     const [firstName, setFirstName] = useState(""); 
     const [lastName, setLastName] = useState("");
+
+    const [err, setErr] = useState("");
 
     //handler when the form is submitted
     const onSubmitHandler = e => {
@@ -16,31 +18,39 @@ export default () => {
             lastName
         })
             .then(res=>{ 
+                const {data} = res;
                 // hide errors
                 // clear input
                 // navigate to new view
-                console.log(res)
+                setErr("");
+                setFirstName("");
+                setLastName("");
+                addPerson(data);
             })
             .catch(err=>{
+                const {response: {data: {message}}} = err;
                 // we had an error
                 // show error messages
-                console.log(err)
+                setErr(message);
             })
     }
     
     //onChange to update firstName and lastName
     return (
-        <form onSubmit={onSubmitHandler}>
-            <p>
-                <label>First Name</label><br/>
-                <input type="text" onChange={(e)=>setFirstName(e.target.value)} value={firstName}/>
-            </p>
-            <p>
-                <label>Last Name</label><br/>
-                <input type="text" onChange={(e)=>setLastName(e.target.value)} value={lastName}/>
-            </p>
-            <input type="submit"/>
-        </form>
+        <div>
+            { err ? <h1 style={{color: "red"}}>{err}</h1> : <h1>Add info!</h1>}
+            <form onSubmit={onSubmitHandler}>
+                <p>
+                    <label>First Name</label><br/>
+                    <input type="text" onChange={(e)=>setFirstName(e.target.value)} value={firstName}/>
+                </p>
+                <p>
+                    <label>Last Name</label><br/>
+                    <input type="text" onChange={(e)=>setLastName(e.target.value)} value={lastName}/>
+                </p>
+                <input type="submit"/>
+            </form>
+        </div>
     )
 }
 
