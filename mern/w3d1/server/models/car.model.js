@@ -3,15 +3,18 @@ const {Schema, model} = require("mongoose");
 const CarSchema = new Schema({
     make: {
         type: String,
-        require: [true, "{PATH} is required"]
-    },
+        require: [true, "{PATH} is required"],
+        minlength: [2, "{PATH} must have 2 characters"]
+    },  
     model: {
         type: String,
-        require: [true, "{PATH} is required"]
+        require: [true, "{PATH} is required"],
+        minlength: [2, "{PATH} must have 2 characters"]
     },
     color: {
         type: String,
-        require: [true, "{PATH} is required"]
+        require: [true, "{PATH} is required"],
+        minlength: [2, "{PATH} must have 2 characters"]
     },
     year: {
         type: Number,
